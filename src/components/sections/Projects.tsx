@@ -13,41 +13,82 @@ type Filter = "All" | ProjectCategory;
 
 const filters: Filter[] = ["All", ...projectCategories];
 
-const ProjectMonogram = ({ value }: { value: string }) => (
-  <div className="relative flex h-24 w-24 items-center justify-center rounded-[1.75rem] border border-white/10 bg-black/10 text-3xl font-display font-bold tracking-[0.2em] text-white shadow-2xl backdrop-blur-sm">
-    <div className="absolute inset-2 rounded-[1.2rem] border border-white/15" />
-    <span className="relative">{value}</span>
-  </div>
-);
+const ProjectMonogram = ({ value, label }: { value: string; label?: string }) => {
+  const isImage = /\.(png|jpe?g|svg|webp)$/i.test(value);
 
-const FrontendCard = ({ project }: { project: Project }) => (
-  <motion.div className="group relative h-full overflow-hidden rounded-2xl glass glow-border">
-    <div className="relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-gradient-primary">
-      <motion.div whileHover={{ scale: 1.08, rotate: 2 }} transition={{ duration: 0.4 }}>
-        <ProjectMonogram value={project.image} />
-      </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+  return (
+    <div className="relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-[1.75rem] border border-white/10 bg-black/10 text-3xl font-display font-bold tracking-[0.2em] text-white shadow-2xl backdrop-blur-sm">
+      <div className="absolute inset-2 rounded-[1.2rem] border border-white/15" />
+      {isImage ? (
+        <img
+          src={value}
+          alt={label ?? "Project image"}
+          className="relative h-full w-full rounded-[1.2rem] object-cover"
+        />
+      ) : (
+        <span className="relative">{value}</span>
+      )}
     </div>
-    <CardBody project={project} />
-  </motion.div>
-);
+  );
+};
 
-const BackendCard = ({ project }: { project: Project }) => (
-  <div className="h-full overflow-hidden rounded-2xl glass">
-    <div className="border-b border-border/50 bg-background/40 px-4 py-2 font-mono text-[11px] text-muted-foreground">
-      <span className="mr-2 inline-flex gap-1">
-        <span className="h-2 w-2 rounded-full bg-destructive/70" />
-        <span className="h-2 w-2 rounded-full bg-yellow-500/70" />
-        <span className="h-2 w-2 rounded-full bg-accent/70" />
-      </span>
-      ~/{project.id}
+const FrontendCard = ({ project }: { project: Project }) => {
+  const isImage = /\.(png|jpe?g|svg|webp)$/i.test(project.image);
+
+  return (
+    <motion.div className="group relative h-full overflow-hidden rounded-2xl glass glow-border">
+      <div className="relative aspect-[16/10] overflow-hidden bg-gradient-primary rounded-t-2xl">
+        {isImage ? (
+          <motion.img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          />
+        ) : (
+          <div className="flex items-center justify-center h-full">
+            <ProjectMonogram value={project.image} label={project.title} />
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      </div>
+      <CardBody project={project} />
+    </motion.div>
+  );
+};
+
+const BackendCard = ({ project }: { project: Project }) => {
+  const isImage = /\.(png|jpe?g|svg|webp)$/i.test(project.image);
+
+  return (
+    <div className="h-full overflow-hidden rounded-2xl glass">
+      {isImage && (
+        <div className="relative aspect-[16/10] overflow-hidden bg-gradient-primary rounded-t-2xl">
+          <motion.img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          />
+        </div>
+      )}
+      <div className="border-b border-border/50 bg-background/40 px-4 py-2 font-mono text-[11px] text-muted-foreground">
+        <span className="mr-2 inline-flex gap-1">
+          <span className="h-2 w-2 rounded-full bg-destructive/70" />
+          <span className="h-2 w-2 rounded-full bg-yellow-500/70" />
+          <span className="h-2 w-2 rounded-full bg-accent/70" />
+        </span>
+        ~/{project.id}
+      </div>
+      <div className="px-5 pt-4 font-mono text-xs text-accent">
+        <TypingLine text={`$ launch ${project.title.toLowerCase().replace(/\s+/g, "-")}`} />
+      </div>
+      <CardBody project={project} />
     </div>
-    <div className="px-5 pt-4 font-mono text-xs text-accent">
-      <TypingLine text={`$ launch ${project.title.toLowerCase().replace(/\s+/g, "-")}`} />
-    </div>
-    <CardBody project={project} />
-  </div>
-);
+  );
+};
 
 const TypingLine = ({ text }: { text: string }) => (
   <motion.span
@@ -63,6 +104,7 @@ const TypingLine = ({ text }: { text: string }) => (
 
 const DatabaseCard = ({ project }: { project: Project }) => {
   const [flip, setFlip] = useState(false);
+  const isImage = /\.(png|jpe?g|svg|webp)$/i.test(project.image);
 
   return (
     <div
@@ -76,8 +118,20 @@ const DatabaseCard = ({ project }: { project: Project }) => {
         className="relative h-full min-h-[340px] [transform-style:preserve-3d]"
       >
         <div className="absolute inset-0 overflow-hidden rounded-2xl glass [backface-visibility:hidden]">
-          <div className="flex aspect-[16/10] items-center justify-center bg-gradient-primary">
-            <ProjectMonogram value={project.image} />
+          <div className="relative aspect-[16/10] bg-gradient-primary rounded-t-2xl overflow-hidden">
+            {isImage ? (
+              <motion.img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+              />
+            ) : (
+              <div className="flex items-center justify-center h-full">
+                <ProjectMonogram value={project.image} label={project.title} />
+              </div>
+            )}
           </div>
           <CardBody project={project} compact />
         </div>
@@ -105,7 +159,7 @@ const LanguageCard = ({ project }: { project: Project }) => (
           </p>
           <h4 className="mt-2 font-display text-xl font-semibold">{project.title}</h4>
         </div>
-        <ProjectMonogram value={project.image} />
+        <ProjectMonogram value={project.image} label={project.title} />
       </div>
       <p className="mt-5 text-sm leading-7 text-muted-foreground">{project.description}</p>
       <div className="mt-5 flex flex-wrap gap-1.5">
@@ -125,16 +179,30 @@ const LanguageCard = ({ project }: { project: Project }) => (
   </div>
 );
 
-const DefaultCard = ({ project }: { project: Project }) => (
-  <div className="group h-full overflow-hidden rounded-2xl glass">
-    <div className="relative flex aspect-[16/10] items-center justify-center bg-gradient-primary">
-      <motion.div whileHover={{ scale: 1.08 }} transition={{ duration: 0.35 }}>
-        <ProjectMonogram value={project.image} />
-      </motion.div>
+const DefaultCard = ({ project }: { project: Project }) => {
+  const isImage = /\.(png|jpe?g|svg|webp)$/i.test(project.image);
+
+  return (
+    <div className="group h-full overflow-hidden rounded-2xl glass">
+      <div className="relative aspect-[16/10] overflow-hidden bg-gradient-primary rounded-t-2xl">
+        {isImage ? (
+          <motion.img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          />
+        ) : (
+          <div className="flex items-center justify-center h-full">
+            <ProjectMonogram value={project.image} label={project.title} />
+          </div>
+        )}
+      </div>
+      <CardBody project={project} />
     </div>
-    <CardBody project={project} />
-  </div>
-);
+  );
+};
 
 const CardBody = ({ project, compact = false }: { project: Project; compact?: boolean }) => (
   <div className={cn("flex flex-col gap-4 p-5", compact && "p-4")}>
@@ -162,6 +230,13 @@ const CardBody = ({ project, compact = false }: { project: Project; compact?: bo
         </span>
       ))}
     </div>
+    {!compact && (
+      <div className="mt-4 opacity-0 translate-y-2 transition-all duration-400 ease-out group-hover:opacity-100 group-hover:translate-y-0">
+        <button className="text-xs bg-accent/20 text-accent px-3 py-1 rounded-full hover:bg-accent/30 transition-colors">
+          Explore Project
+        </button>
+      </div>
+    )}
     <p className="text-xs uppercase tracking-[0.25em] text-accent">{project.status}</p>
     {!compact && <CardActions project={project} />}
   </div>
@@ -285,7 +360,13 @@ export const Projects = () => {
                 initial={{ opacity: 0, y: 30, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
+                whileHover={{
+                  scale: 1.06,
+                  y: -12,
+                  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] }
+                }}
                 transition={{ delay: index * 0.05, duration: 0.45 }}
+                className="relative z-10 hover:z-50 hover:shadow-[0_30px_80px_rgba(0,0,0,0.45)]"
               >
                 {renderCard(project)}
               </motion.div>

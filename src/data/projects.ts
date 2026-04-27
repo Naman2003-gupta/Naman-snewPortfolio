@@ -1,3 +1,24 @@
+import AfsImage from "@/assets/AFS.png";
+import GameForgeImage from "@/assets/gameforge.png";
+import EmberImage from "@/assets/ember.png";
+import InsureTripImage from "@/assets/insuretrip.png";
+import TsllogoImage from "@/assets/tsllogo.png";
+import VeritasImage from "@/assets/veritas.png";
+import GameForgeStudiosImage from "@/assets/GTF.png";
+import BankImage from "@/assets/bank.png";
+import MediscanImage from "@/assets/dr.png";
+import DocGenImage from "@/assets/notes.png";
+import NeuralImage from "@/assets/neural.png";
+import BookMySlotImage from "@/assets/ainbh.png";
+import QuoteKeeperImage from "@/assets/Kretivanlogo.png";
+import BonVoyageImage from "@/assets/metayug.png";
+import IcePlayImage from "@/assets/pp.png";
+import AiForgeStudiosImage from "@/assets/crypto.png";
+import TicTacToeImage from "@/assets/jsb.png";
+import ChattingAppImage from "@/assets/sfms.png";
+import FileExplorerImage from "@/assets/smallcopper.png";
+import EmailVerificationImage from "@/assets/quantum.png";
+
 export type ProjectCategory =
   | "Frontend"
   | "Backend"
@@ -30,7 +51,7 @@ export const projects: Project[] = [
     primaryCategory: "Frontend",
     categories: ["Frontend", "Full Stack"],
     tech: ["React.js", "Next.js", "Tailwind CSS", "Framer Motion", "Node.js", "MongoDB"],
-    image: "GF",
+    image: GameForgeImage,
     status: "Interactive frontend heavy UI project",
   },
   {
@@ -41,7 +62,7 @@ export const projects: Project[] = [
     primaryCategory: "Frontend",
     categories: ["Frontend"],
     tech: ["React.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    image: "EM",
+    image: EmberImage,
     status: "Modern UI based project with animations",
   },
   {
@@ -52,7 +73,7 @@ export const projects: Project[] = [
     primaryCategory: "Backend",
     categories: ["Backend", "Full Stack"],
     tech: ["Node.js", "Express.js", "REST APIs", "MongoDB", "AI Integration"],
-    image: "AI",
+    image: AfsImage,
     status: "Backend APIs and AI integration project",
   },
   {
@@ -63,7 +84,7 @@ export const projects: Project[] = [
     primaryCategory: "Backend",
     categories: ["Backend", "Full Stack"],
     tech: ["MongoDB", "Express.js", "React.js", "Node.js", "JWT"],
-    image: "BM",
+    image: BookMySlotImage,
     status: "MERN based appointment system",
   },
   {
@@ -74,7 +95,7 @@ export const projects: Project[] = [
     primaryCategory: "Database",
     categories: ["Database"],
     tech: ["MongoDB", "Mongoose", "JWT Authentication", "Node.js"],
-    image: "QK",
+    image: QuoteKeeperImage,
     status: "MongoDB storage with authentication",
   },
   {
@@ -85,7 +106,7 @@ export const projects: Project[] = [
     primaryCategory: "Database",
     categories: ["Database"],
     tech: ["MySQL", "SQL", "Java", "Database Schema Design"],
-    image: "OB",
+    image: BankImage,
     status: "Database-driven application",
   },
   {
@@ -96,7 +117,7 @@ export const projects: Project[] = [
     primaryCategory: "Full Stack",
     categories: ["Full Stack"],
     tech: ["React.js", "Node.js", "MongoDB", "Express.js", "REST APIs"],
-    image: "BV",
+    image: BonVoyageImage,
     status: "Travel booking system capstone project",
   },
   {
@@ -107,7 +128,7 @@ export const projects: Project[] = [
     primaryCategory: "Freelance",
     categories: ["Freelance", "Full Stack"],
     tech: ["React.js", "Node.js", "MongoDB", "Reward Logic", "Gamification"],
-    image: "IP",
+    image: IcePlayImage,
     status: "Private freelance gaming rewards platform",
   },
   {
@@ -119,7 +140,7 @@ export const projects: Project[] = [
     categories: ["Freelance", "Frontend", "Full Stack"],
     tech: ["React.js", "Next.js", "Responsive UI", "Website Rebuild", "Performance"],
     demoUrl: "https://tslceremat.com",
-    image: "TS",
+    image: TsllogoImage,
     status: "Live business website rebuild for TSL Ceramat, Mumbai",
   },
   {
@@ -130,7 +151,7 @@ export const projects: Project[] = [
     primaryCategory: "Startup",
     categories: ["Startup", "Full Stack"],
     tech: ["AI Workflows", "Prompt Engineering", "Full Stack Development", "Product Architecture"],
-    image: "AF",
+    image: AiForgeStudiosImage,
     status: "Startup ecosystem in active development",
   },
   {
@@ -141,7 +162,7 @@ export const projects: Project[] = [
     primaryCategory: "Startup",
     categories: ["Startup", "Backend", "Full Stack"],
     tech: ["AI Integration", "Healthcare Workflow", "Node.js", "Full Stack"],
-    image: "MS",
+    image: MediscanImage,
     status: "Medical AI support product",
   },
   {
@@ -152,7 +173,7 @@ export const projects: Project[] = [
     primaryCategory: "Startup",
     categories: ["Startup", "Full Stack"],
     tech: ["AI Document Generation", "Prompt Workflows", "PDF Output", "Structured Data"],
-    image: "DG",
+    image: DocGenImage,
     status: "AI document generation product",
   },
   {
@@ -163,7 +184,7 @@ export const projects: Project[] = [
     primaryCategory: "Startup",
     categories: ["Startup", "Frontend", "Full Stack"],
     tech: ["Prompt Engineering", "Game Building", "Interactive UI", "Full Stack"],
-    image: "GS",
+    image: GameForgeStudiosImage,
     status: "Prompt to real game building startup product",
   },
   {
@@ -174,7 +195,7 @@ export const projects: Project[] = [
     primaryCategory: "Startup",
     categories: ["Startup", "Full Stack"],
     tech: ["Marketplace", "Freelancing Workflow", "Payments", "Full Stack"],
-    image: "VR",
+    image: VeritasImage,
     status: "Freelancing platform with project and earning flow",
   },
   {
@@ -185,7 +206,7 @@ export const projects: Project[] = [
     primaryCategory: "Startup",
     categories: ["Startup", "Full Stack"],
     tech: ["Insurance Workflow", "Form Systems", "Full Stack", "User Journey"],
-    image: "IN",
+    image: InsureTripImage,
     status: "Insurance product for small projects",
   },
   {
@@ -196,7 +217,7 @@ export const projects: Project[] = [
     primaryCategory: "Startup",
     categories: ["Startup", "Full Stack"],
     tech: ["AI Fitness", "Personalization", "Dashboard UX", "Full Stack"],
-    image: "FT",
+    image: NeuralImage,
     status: "AI trainer for fitness",
   },
   {
@@ -208,7 +229,7 @@ export const projects: Project[] = [
     categories: ["Language Based"],
     language: "JavaScript",
     tech: ["JavaScript", "HTML5", "CSS3"],
-    image: "TT",
+    image: TicTacToeImage,
     status: "Language based project",
   },
   {
@@ -220,7 +241,7 @@ export const projects: Project[] = [
     categories: ["Language Based"],
     language: "Node.js",
     tech: ["Node.js", "Express.js", "JavaScript"],
-    image: "CA",
+    image: ChattingAppImage,
     status: "Language based project",
   },
   {
@@ -232,7 +253,7 @@ export const projects: Project[] = [
     categories: ["Language Based"],
     language: "Node.js",
     tech: ["Node.js", "JavaScript", "File System APIs"],
-    image: "FE",
+    image: FileExplorerImage,
     status: "Language based project",
   },
   {
@@ -244,7 +265,7 @@ export const projects: Project[] = [
     categories: ["Language Based"],
     language: "PHP",
     tech: ["PHP", "MySQL", "Authentication"],
-    image: "EV",
+    image: EmailVerificationImage,
     status: "Language based project",
   },
 ];
